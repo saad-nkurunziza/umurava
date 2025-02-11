@@ -35,16 +35,16 @@ const Integration = () => {
 
       <div className="grid md:grid-cols-2 gap-8 items-center">
         <div className="space-y-6">
-          <ul className="space-y-4">
+          <div className="space-y-4">
             {integrationItems.map((item) => (
-              <li key={item.id} className="flex items-center gap-3">
+              <div key={item.id} className="flex sm:items-center gap-3">
                 <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm">
                   {item.id}
                 </div>
                 <span>{item.text}</span>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
         <div className="relative h-[400px] rounded-lg overflow-hidden">
           <Image

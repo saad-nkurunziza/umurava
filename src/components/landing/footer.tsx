@@ -11,6 +11,7 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 import ThemeToggler from "./theme-toggler";
+import Image from "next/image";
 
 const socialLinks = [
   {
@@ -58,9 +59,13 @@ export default function Footer() {
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-[1280px]">
         <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between mb-12">
           <Link href="/">
-            <div className="flex  gap-2">
-              <span className="text-xl font-bold text-foreground">Umurava</span>
-            </div>
+            <Image
+              className="relative"
+              width={125}
+              height={24}
+              alt="Umurava logo"
+              src={"/logo.png"}
+            />
           </Link>
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             {socialLinks.map((social, index) => (

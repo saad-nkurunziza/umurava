@@ -6,7 +6,7 @@ const CTA = () => {
   return (
     <CTABox>
       <div className="flex flex-col gap-8 py-6 justify-center items-center max-w-[40%] mx-auto z-10">
-        <h2 className="text-3xl font-bold text-center text-primary-foreground">
+        <h2 className="text-xl sm:text-3xl font-bold text-center text-primary-foreground">
           Ready to transform your learning institution?
         </h2>
         <Button
