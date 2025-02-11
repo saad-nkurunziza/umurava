@@ -32,7 +32,7 @@ const Nav = () => {
           </Button>
         </SheetTrigger>
         <SheetContent>
-          <SheetHeader>
+          <SheetHeader className="text-left mb-8">
             <SheetTitle className="text-xs text-muted-foreground">
               Navigation
             </SheetTitle>
@@ -50,7 +50,7 @@ const Nav = () => {
                 {link.label}
               </Link>
             ))}
-            <div className="relativeflex-[0_0_auto] ">
+            <div className="relativeflex-[0_0_auto] mt-2">
               <Button asChild>
                 <Link href="/dashboard">Join the Program</Link>
               </Button>
