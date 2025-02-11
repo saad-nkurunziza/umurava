@@ -18,7 +18,7 @@ const Navigation = () => {
 
       <Nav />
 
-      <div className="relative flex-[0_0_auto] ">
+      <div className="hidden relative sm:flex flex-[0_0_auto] ">
         <Button asChild>
           <Link href="/dashboard">Join the Program</Link>
         </Button>

@@ -11,10 +11,10 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   section {
-    @apply container mx-auto px-4 md:px-6 lg:px-8 max-w-[1280px] py-16 overflow-x-hidden;
+    @apply container mx-auto px-4 md:px-6 lg:px-8 max-w-[1280px] py-8 sm:py-16 overflow-x-hidden;
   }
   main {
-    @apply flex min-h-screen flex-col items-center gap-16 py-2;
+    @apply flex min-h-screen flex-col items-center gap-16;
   }
 }
 
