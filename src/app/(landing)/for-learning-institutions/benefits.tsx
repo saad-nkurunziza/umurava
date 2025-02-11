@@ -47,12 +47,12 @@ const Benefits = () => {
   return (
     <section>
       <SimpleTitle title="Key Offerings & Benefits:" />
-      <div className="grid grid-cols-3 gap-6 mx-auto">
+      <div className="grid sm:grid-cols-3 gap-6 mx-auto">
         {benefits.map((benefit, index) => (
           <div
             key={index}
             className={`p-8 rounded-xl bg-primary ${
-              index === 3 ? "col-span-2" : ""
+              index === 3 ? "sm:col-span-2" : ""
             }`}
           >
             <div className="flex flex-col gap-4">

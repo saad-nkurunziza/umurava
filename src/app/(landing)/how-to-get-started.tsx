@@ -10,7 +10,7 @@ export default function HowToGetStarted() {
         subtitle="Join our community of digital professionals and start your journey today"
       />
 
-      <div className="grid grid-cols-2 gap-8 mt-12">
+      <div className="grid sm:grid-cols-2 gap-8 mt-12">
         <div className="space-y-8 flex flex-col">
           <StepBox
             stepNumber={1}

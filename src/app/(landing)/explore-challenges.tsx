@@ -11,7 +11,7 @@ const ExploreChallenges = () => {
         subtitle="Join Skills Challenges Program to accelerate your career growth and become part of Africa’s largest workforce of digital professionals."
       />
 
-      <div className="flex justify-center gap-3 w-full mx-auto">
+      <div className="flex flex-col sm:flex-row justify-center gap-3 w-full mx-auto">
         <ChallengeCard />
         <ChallengeCard />
         <ChallengeCard />

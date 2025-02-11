@@ -20,10 +20,10 @@ const SectionTitle: React.FC<SectionTitleProps> = ({
           aside ? "text-start mx-0" : "text-center mx-auto"
         )}
       >
-        <h2 className="text-4xl font-bold mb-4">{title}</h2>
+        <h2 className="text-xl sm:text-4xl font-bold mb-4">{title}</h2>
         <p
           className={cn(
-            "text-lg text-muted-foreground max-w-2xl",
+            "sm:text-lg text-muted-foreground max-w-2xl",
             aside ? "ml-0" : "mx-auto"
           )}
         >
@@ -54,7 +54,7 @@ export const SimpleTitle: React.FC<SectionTitleOnlyProps> = ({
             : "text-left mx-0"
         )}
       >
-        <h2 className="text-4xl font-bold mb-4">{title}</h2>
+        <h2 className="text-xl sm:text-4xl font-bold mb-4">{title}</h2>
       </div>
     </section>
   );

@@ -37,8 +37,8 @@ export default function MoreInfo() {
         title="What else can I gain from participating in Skills Challenges?"
         subtitle="Join Skills Challenges Program to accelerate your career growth and become part of Africa's largest workforce of digital professionals."
       />
-      <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-2 grid grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-3 gap-6">
+        <div className="sm:col-span-2 grid grid-cols-2 gap-6">
           {features.map((feature, index) => (
             <div key={index} className="flex flex-col gap-3">
               <div className="w-12 h-12 bg-primary rounded-md flex items-center justify-center">

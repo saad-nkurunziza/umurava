@@ -56,9 +56,9 @@ export default function Footer() {
   return (
     <footer className="border-t bg-background/50 backdrop-blur-md pt-12 pb-8">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 max-w-[1280px]">
-        <div className="flex flex-col sm:flex-row items-center justify-between mb-12">
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between mb-12">
           <Link href="/">
-            <div className="flex items-center gap-2">
+            <div className="flex  gap-2">
               <span className="text-xl font-bold text-foreground">Umurava</span>
             </div>
           </Link>

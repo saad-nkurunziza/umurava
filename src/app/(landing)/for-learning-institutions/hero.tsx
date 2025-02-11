@@ -8,11 +8,11 @@ const Hero = () => {
     <section>
       <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-6">
-          <h1 className="text-4xl text-primary font-bold tracking-tight">
+          <h1 className="text-xl sm:text-4xl text-primary font-bold tracking-tight">
             Accelerate Your Students and Trainees Employability and Career
             Growth through Project-based Learning Solution
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="sm:text-lg text-muted-foreground">
             We partner with Universities, Schools, and Training institutions to
             build the next generation of the workforce through project-based
             learning, skills challenges and hackathons

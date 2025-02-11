@@ -51,14 +51,14 @@ export const Skills = () => {
             <div className="p-2 rounded bg-background text-muted-foreground shadow">
               <Briefcase className="w-8 h-8" />
             </div>
-            <p className="font-light text-muted-foreground max-w-[60%] leading-[30px]">
+            <p className="font-light text-muted-foreground sm:max-w-[60%] leading-[30px]">
               The Embedded Finance Platform and Payroll Management Software
               Solutions for your organization and Workforce.
             </p>
           </div>
           <Link
             href="#"
-            className="flex items-center gap-2 text-primary-foreground "
+            className="hidden sm:flex items-center gap-2 text-primary-foreground "
           >
             <span className="text-primary">Learn more</span>
             <span className="flex items-center justify-center w-5 h-5 bg-primary text-foreground rounded-full">
@@ -66,7 +66,7 @@ export const Skills = () => {
             </span>
           </Link>
         </div>
-        <div className="relative p-2 bg-foreground w-full h-66 md:h-auto">
+        <div className="relative p-2 bg-foreground w-full h-auto sm:h-auto">
           <Image
             alt="Payroll dashboard"
             layout="fill"
@@ -74,6 +74,15 @@ export const Skills = () => {
             src={"/payroll.png"}
           />
         </div>
+        <Link
+          href="#"
+          className="flex sm:hidden items-center gap-2 text-primary-foreground "
+        >
+          <span className="text-primary">Learn more</span>
+          <span className="flex items-center justify-center w-5 h-5 bg-primary text-foreground rounded-full">
+            <ArrowRight className="w-4 h-4 text-primary-foreground" />
+          </span>
+        </Link>
       </div>
 
       <div className="flex items-center gap-2.5 justify-center mx-auto mt-8">
