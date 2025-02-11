@@ -12,7 +12,10 @@ export const Stats = () => {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-4">
         <dl className="grid sm:grid-cols-2 gap-x-8 gap-y-16 text-center lg:grid-cols-4 text-primary-foreground">
           {statsData.map((stat, index) => (
-            <div key={index} className="mx-auto flex max-w-xs flex-col gap-y-4">
+            <div
+              key={index}
+              className="mx-auto flex max-w-xs flex-col gap-y-2 sm:gap-y-4"
+            >
               <dt className="text-sm sm:text-base/7 text-primary-foreground/80">
                 {stat.label}
               </dt>

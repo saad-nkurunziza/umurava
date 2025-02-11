@@ -18,7 +18,7 @@ export default function page() {
             form, and we'll get back to you as soon as possible."
         />
 
-        <div className="grid grid-cols-2 gap-16">
+        <div className="grid sm:grid-cols-2 gap-16">
           <ContactForm />
           <div className="flex flex-col gap-2">
             <div className="p-6">

@@ -29,12 +29,12 @@ const Problem = () => {
   return (
     <section>
       <SimpleTitle title="Why we are solving this problem" />
-      <div className="grid grid-cols-2 gap-6 mx-auto">
+      <div className="grid sm:grid-cols-2 gap-6 mx-auto">
         {problems.map((problem, index) => (
           <div
             key={index}
             className={`p-8 ${
-              index === 0 ? "col-span-2" : ""
+              index === 0 ? "sm:col-span-2" : ""
             } bg-primary rounded-lg`}
           >
             <div className="flex flex-col gap-4">
