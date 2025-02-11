@@ -1,0 +1,182 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum ChallengeStatus {
+  Open
+  Closed
+  Postponed
+  Canceled
+
+  // For challenges status
+}
+
+enum UserChallengeStatus {
+  Open
+  Ongoing
+  Completed
+
+  // For user challenges status
+}
+
+enum DeliverableStatus {
+  Submitted
+  Accepted
+  Rejected
+  NeedsRevision
+}
+
+enum ChallengeLevel {
+  Junior
+  Intermediate
+  Senior
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole  @default(USER)
+  accounts      Account[]
+  sessions      Session[]
+
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  challenges  UserChallenge[]
+  submissions Deliverable[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Challenge {
+  id                 String          @id @default(cuid())
+  title              String
+  projectDescription String
+  projectBrief       String
+  projectTasks       String[]
+  requirements       String[]        @default([])
+  skills             String[]
+  level              ChallengeLevel  @default(Junior)
+  prize              Int
+  status             ChallengeStatus @default(Open)
+  maxParticipants    Int?
+  startDate          DateTime
+  endDate            DateTime
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  participants       UserChallenge[]
+  submissions        Deliverable[]
+
+  @@map("challenges")
+}
+
+// Example challenge creation:
+/**
+ * {
+ * title: "Build a React Weather Dashboard",
+ * skills: ["React", "TypeScript", "API Integration"],
+ * level: "Junior",
+ * prize: 500,
+ * projectDescription: "Create a modern weather dashboard using React",
+ * projectBrief: "Build a responsive weather application that shows current weather and 5-day forecast",
+ * projectTasks: [
+ * "Implement OpenWeather API integration",
+ * "Create responsive UI components",
+ * "Add location search functionality"
+ * ],
+ * status: "Open",
+ * maxParticipants: 3,
+ * requirements: ["Git knowledge", "JavaScript experience"],
+ * }
+ */
+
+model UserChallenge {
+  id          String              @id @default(cuid())
+  userId      String
+  challengeId String
+  status      UserChallengeStatus @default(Ongoing)
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, challengeId])
+  @@map("user_challenges")
+}
+
+model Deliverable {
+  id            String            @id @default(cuid())
+  userId        String
+  challengeId   String
+  codebase_link String
+  more_info     String
+  status        DeliverableStatus @default(Submitted)
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  challenge Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, challengeId])
+  @@map("deliverables")
+}

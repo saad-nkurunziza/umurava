@@ -1,0 +1,45 @@
+src/
+├── app/
+│   ├── (landing)/
+│   │   └── page.tsx
+│   ├── (auth)/
+│   │   ├── login/
+│   │   │   └── page.tsx
+│   │   ├── register/
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── (user)/
+│   │   ├── dashboard/
+│   │   │   └── page.tsx
+│   │   ├── profile/
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── (admin)/
+│   │   ├── users/
+│   │   │   └── page.tsx
+│   │   ├── settings/
+│   │   │   └── page.tsx
+│   │   └── layout.tsx
+│   ├── api/
+│   │   └── auth/
+│   │       └── [...nextauth]/
+│   │           └── route.ts
+│   └── layout.tsx
+├── components/
+│   ├── ui/
+│   │   └── ... (shadcn/ui components)
+│   ├── layout/
+│   │   ├── Header.tsx
+│   │   └── Footer.tsx
+│   └── ... (other components)
+├── lib/
+│   ├── prisma.ts
+│   └── auth.ts
+├── styles/
+│   └── globals.css
+├── types/
+│   └── next-auth.d.ts
+├── middleware.ts
+└── utils/
+    ├── api.ts
+    └── helpers.ts

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  section {
+    @apply container mx-auto px-4 md:px-6 lg:px-8 max-w-[1280px] py-16 overflow-x-hidden;
+  }
+  main {
+    @apply flex min-h-screen flex-col items-center gap-16 py-2;
+  }
+}
+
+@layer utilities {
+  .even-row {
+    @apply w-full;
+    background-color: hsl(var(--muted-foreground) / 0.08);
+  }
+}
