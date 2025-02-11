@@ -66,7 +66,7 @@ export const Skills = () => {
             </span>
           </Link>
         </div>
-        <div className="relative p-2 bg-foreground w-full h-66 sm:h-auto">
+        <div className="hidden sm:flex relative p-2 bg-foreground w-full h-66 sm:h-auto">
           <Image
             alt="Payroll dashboard"
             layout="fill"

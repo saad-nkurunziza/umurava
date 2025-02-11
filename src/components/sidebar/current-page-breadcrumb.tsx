@@ -22,11 +22,6 @@ import { ChevronRight } from "lucide-react";
 
 // const ROUTE_NAMES = {
 //   dashboard: "Dashboard",
-//   products: "Products",
-//   suppliers: "Suppliers",
-//   customers: "Customers",
-//   sales: "Sales",
-//   purchases: "Purchases",
 //   analytics: "Analytics",
 //   settings: "Settings",
 //   profile: "Profile",

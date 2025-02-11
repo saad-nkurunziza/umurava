@@ -68,7 +68,7 @@ export default async function Dashboard() {
   return (
     <div className="min-h-screen">
       <div className="space-y-8">
-        <div className="mb-12 flex flex-col sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-12 flex flex-row sm:items-end sm:justify-between">
           <h1 className="font-semibold tracking-tight">
             Hi, <span className="capitalize">{uName}</span>
           </h1>
@@ -76,7 +76,7 @@ export default async function Dashboard() {
             <Button asChild variant={"outline"} className="rounded-xl relative">
               <Link href="/challenge/create">
                 <Plus className="size-4" />
-                <span className="ml-2">Create challenge</span>
+                <span className="ml-2 hidden sm:flex">Create challenge</span>
               </Link>
             </Button>
           )}
@@ -95,7 +95,7 @@ export default async function Dashboard() {
           </div>
         ) : (
           <Fragment>
-            <div className="mb-12 grid gap-6 grid-cols-2 sm:grid-cols-4">
+            <div className="mb-12 grid gap-6 grid-cols-1 sm:grid-cols-4">
               {statData.map((stat, index) => (
                 <StatCard
                   key={index}
