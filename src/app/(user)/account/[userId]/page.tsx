@@ -24,6 +24,16 @@ import {
 import NoPage from "@/components/not-found";
 import { auth } from "@/lib/auth";
 import BackButton from "@/components/back-button";
+import { getStaticAccounts } from "@/lib/actions/static-fetches";
+
+export async function generateStaticParams() {
+  const res = await getStaticAccounts();
+  return res.data
+    ? res.data.map((user) => ({
+        userId: String(user.id),
+      }))
+    : [];
+}
 
 const AccountAnyUserPage = async ({
   params,
@@ -32,9 +42,13 @@ const AccountAnyUserPage = async ({
 }) => {
   const userId = (await params).userId;
   const session = await auth();
-  const { data: user } = await getUserById(userId);
-  const { data: stats } = await getUserStats(userId);
-  const { data: challenges } = await getUserChallenges(userId);
+
+  const [{ data: user }, { data: stats }, { data: challenges }] =
+    await Promise.all([
+      getUserById(userId),
+      getUserStats(userId),
+      getUserChallenges(userId),
+    ]);
 
   if (!user) return null;
   if (user.role === "ADMIN" && session?.user.role !== "ADMIN") {

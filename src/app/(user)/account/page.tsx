@@ -28,9 +28,16 @@ import { auth } from "@/lib/auth";
 
 export default async function AccountPage() {
   const session = await auth();
-  const { data: extendedUser } = await getCurrentUser();
+  const currentUserDataFn = getCurrentUser();
+  const adminStatsDataFn = getAdminStats();
 
-  const { data: adminServerStats } = await getAdminStats();
+  const [currentUserData, adminStatsData] = await Promise.all([
+    currentUserDataFn,
+    adminStatsDataFn,
+  ]);
+  const { data: extendedUser } = currentUserData;
+
+  const { data: adminServerStats } = adminStatsData;
   if (!session || !session.user || !extendedUser) {
     redirect("/login");
   }

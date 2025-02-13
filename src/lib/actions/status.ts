@@ -3,7 +3,11 @@ import { auth } from "../auth";
 export async function getStatus(challengeId: string) {
   try {
     const session = await auth();
-    if (!session || !session.user) return { error: "Unauthorized" };
+
+    if (!session || !session.user) {
+      console.error("Unauthorized access attempt");
+      return { error: "Unauthorized" };
+    }
     const status = await db.challenge.findUnique({
       where: {
         id: challengeId,
@@ -34,7 +38,7 @@ export async function getStatus(challengeId: string) {
     }
     return { data: status };
   } catch (error) {
-    console.error(error);
+    console.error({ error });
     return { error: "Internal server error" };
   }
 }

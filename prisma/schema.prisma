@@ -127,26 +127,6 @@ model Challenge {
   @@map("challenges")
 }
 
-// Example challenge creation:
-/**
- * {
- * title: "Build a React Weather Dashboard",
- * skills: ["React", "TypeScript", "API Integration"],
- * level: "Junior",
- * prize: 500,
- * projectDescription: "Create a modern weather dashboard using React",
- * projectBrief: "Build a responsive weather application that shows current weather and 5-day forecast",
- * projectTasks: [
- * "Implement OpenWeather API integration",
- * "Create responsive UI components",
- * "Add location search functionality"
- * ],
- * status: "Open",
- * maxParticipants: 3,
- * requirements: ["Git knowledge", "JavaScript experience"],
- * }
- */
-
 model UserChallenge {
   id          String              @id @default(cuid())
   userId      String

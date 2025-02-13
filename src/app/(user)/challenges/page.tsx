@@ -38,7 +38,7 @@ export default async function YourChallengesPage() {
     <div className="min-h-screen">
       <div className="space-y-8">
         <Tabs defaultValue="All" className="mb-8">
-          <TabsList className="h-10 overflow-x-scroll rounded-none border-b bg-transparent p-0">
+          <TabsList className="h-10 rounded-none border-b bg-transparent p-0">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab.value}

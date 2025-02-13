@@ -18,6 +18,7 @@ const navLinks = [
   { href: "/for-learning-institutions", label: "For Educational Institutions" },
   { href: "/about-us", label: "About Us" },
   { href: "/contact-us", label: "Contact Us" },
+  { href: "/features", label: "Features" },
 ];
 
 const Nav = () => {

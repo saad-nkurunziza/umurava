@@ -46,6 +46,16 @@ import { revalidatePath } from "next/cache";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { checkIfSubmission } from "@/lib/actions/submissions";
 import { SubmitButton } from "@/components/submit-button";
+import { getStaticChallenges } from "@/lib/actions/static-fetches";
+
+export async function generateStaticParams() {
+  const res = await getStaticChallenges();
+  return res.data
+    ? res.data.map((challenge) => ({
+        id: String(challenge.id),
+      }))
+    : [];
+}
 
 export default async function ChallengeDetailsPage({
   params,
@@ -92,12 +102,6 @@ export default async function ChallengeDetailsPage({
     );
   }
 
-  async function confirmDeleteChallenge() {
-    const deletedChallenge = await deleteChallenge(challenge.id);
-    if (deletedChallenge.data) {
-      redirect("/challenges");
-    }
-  }
   const isJoined = isJoinedData.isJoined;
   const isSubmitted = isSubmittedData.isSubmitted;
 
@@ -196,7 +200,7 @@ export default async function ChallengeDetailsPage({
                           <form
                             action={async () => {
                               "use server";
-                              await confirmDeleteChallenge();
+                              await deleteChallenge(challenge.id);
                             }}
                           >
                             <Button type="submit" className="flex-1">
@@ -308,8 +312,10 @@ export default async function ChallengeDetailsPage({
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>Participants</DialogTitle>
-                        <ScrollArea className="h-[55vh] mt-6">
+                        <DialogTitle className=" mb-6">
+                          Participants
+                        </DialogTitle>
+                        <ScrollArea className="h-[55vh]">
                           <div className="flex flex-col gap-4">
                             {challenge.participants.map((item) => {
                               return (

@@ -1,3 +1,5 @@
+public/
+prisma/
 src/
 ├── app/
 │   ├── (landing)/
@@ -5,13 +7,19 @@ src/
 │   ├── (auth)/
 │   │   ├── login/
 │   │   │   └── page.tsx
-│   │   ├── register/
+│   │   ├── error/
 │   │   │   └── page.tsx
 │   │   └── layout.tsx
 │   ├── (user)/
+│   │   ├── account/
+│   │   │   └── page.tsx
+│   │   ├── challenge/
+│   │   │   └── page.tsx
 │   │   ├── dashboard/
 │   │   │   └── page.tsx
-│   │   ├── profile/
+│   │   ├── explore/
+│   │   │   └── page.tsx
+│   │   ├── submissions/
 │   │   │   └── page.tsx
 │   │   └── layout.tsx
 │   ├── (admin)/
@@ -26,14 +34,10 @@ src/
 │   │           └── route.ts
 │   └── layout.tsx
 ├── components/
-│   ├── ui/
-│   │   └── ... (shadcn/ui components)
-│   ├── layout/
-│   │   ├── Header.tsx
-│   │   └── Footer.tsx
-│   └── ... (other components)
+│   └── ui/
+│       └── ... (shadcn/ui components)
 ├── lib/
-│   ├── prisma.ts
+│   ├── db.ts
 │   └── auth.ts
 ├── styles/
 │   └── globals.css
@@ -41,5 +45,3 @@ src/
 │   └── next-auth.d.ts
 ├── middleware.ts
 └── utils/
-    ├── api.ts
-    └── helpers.ts

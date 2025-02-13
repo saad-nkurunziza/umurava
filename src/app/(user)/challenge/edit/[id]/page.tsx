@@ -3,6 +3,16 @@ import React from "react";
 import NoPage from "@/components/not-found";
 import { EditChallengeForm } from "@/components/edit-challenge-form";
 import BackButton from "@/components/back-button";
+import { getStaticChallenges } from "@/lib/actions/static-fetches";
+
+export async function generateStaticParams() {
+  const res = await getStaticChallenges();
+  return res.data
+    ? res.data.map((challenge) => ({
+        id: String(challenge.id),
+      }))
+    : [];
+}
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const challenge = await getEditChallengeById((await params).id);

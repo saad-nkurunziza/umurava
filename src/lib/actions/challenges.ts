@@ -8,6 +8,7 @@ import type {
 } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { auth } from "../auth";
+import { redirect } from "next/navigation";
 
 type CreateChallengeInput = Omit<Challenge, "id" | "createdAt" | "updatedAt">;
 
@@ -346,6 +347,7 @@ export async function deleteChallenge(id: string) {
     [`challenge/${id}`, "challenges", "explore", "dashboard"].forEach((path) =>
       revalidatePath(`/${path}`)
     );
+    redirect("/challenges");
     return { data: { success: true } };
   } catch (error) {
     console.error(error);

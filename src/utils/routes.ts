@@ -4,8 +4,8 @@ export const publicRoutes = [
   "/contact-us",
   "/for-learning-institutions",
   "/challenges-hackathons",
+  "/features",
 ];
 export const authRoutes = ["/login", "/register", "/error"];
-export const adminRoutes = ["/admin*"];
 export const apiAuthPrefix = "/api/auth";
 export const DEFAULT_AUTH_REDIRECT = "/dashboard";

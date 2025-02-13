@@ -15,11 +15,20 @@ import { auth } from "@/lib/auth";
 export default async function Dashboard() {
   const session = await auth();
 
-  const { data: allChallenges } = await getChallenges();
-
   if (!session || !session.user) redirect("/login");
-  const { data: stats } = await getUserStats(session.user.id!);
-  const { data: yourChallenges } = await getUserChallenges(session.user.id!);
+
+  const challengesData = getChallenges();
+  const userStatsData = getUserStats(session.user.id!);
+  const userChallengesData = getUserChallenges(session.user.id!);
+  const [challenges, userStats, userChallenges] = await Promise.all([
+    challengesData,
+    userStatsData,
+    userChallengesData,
+  ]);
+
+  const { data: allChallenges } = challenges;
+  const { data: stats } = userStats;
+  const { data: yourChallenges } = userChallenges;
   const user = session.user;
 
   const isEmpty =
@@ -68,7 +77,7 @@ export default async function Dashboard() {
   return (
     <div className="min-h-screen">
       <div className="space-y-8">
-        <div className="mb-12 flex flex-row sm:items-end sm:justify-between">
+        <div className="mb-12 flex items-end justify-between">
           <h1 className="font-semibold tracking-tight">
             Hi, <span className="capitalize">{uName}</span>
           </h1>
