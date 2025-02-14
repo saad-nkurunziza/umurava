@@ -75,7 +75,7 @@ export function SearchDialog() {
                     key={challenge.id}
                     className="flex flex-col items-start py-1 gap-0.5"
                     onSelect={() => {
-                      router.push(`/challenges/${challenge.id}`);
+                      router.push(`/challenge/${challenge.id}`);
                     }}
                   >
                     <h5>{challenge.title}</h5>

@@ -57,7 +57,7 @@ export function NavChallenges() {
             <SidebarMenuItem key={item.id}>
               <SidebarMenuButton asChild>
                 <Link href={`/challenge/${item.challenge.id}`}>
-                  {item.challenge.title}
+                  <span className="line-clamp-1">{item.challenge.title}</span>
                 </Link>
               </SidebarMenuButton>
               <DropdownMenu>
