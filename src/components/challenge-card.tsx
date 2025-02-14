@@ -17,7 +17,7 @@ export default async function ChallengeCard({
   return (
     <Card className="overflow-hidden">
       <div className="border-b p-6 space-y-2">
-        <div className="flex items-center justify-between">
+        <div className="flex gap-1 justify-between">
           <div className="">
             <h3 className="font-medium">{challenge.title}</h3>
             <p className="text-muted-foreground text-sm line-clamp-2">
@@ -73,7 +73,7 @@ export default async function ChallengeCard({
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium">Skills Needed:</p>
-            <div className="mt-2 flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {challenge.skills.map((skill) => (
                 <Badge variant="secondary" key={skill}>
                   {" "}
