@@ -434,6 +434,9 @@ export async function removeUserFromChallenge(
     if (!userChallenge) {
       return { error: "User not on this challenge" };
     }
+    if (userChallenge.status === "Completed" || userChallenge.challenge.status !== "Open") {
+      return { error: "Challenge status unavailable" };
+    }
     const existingChallenge = await db.challenge.findFirst({
       where: {
         id: challengeId,

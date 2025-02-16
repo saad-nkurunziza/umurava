@@ -1,7 +1,7 @@
 import React from "react";
 import SectionTitle from "@/components/landing/section-title";
-import Image from "next/image";
 import { Briefcase } from "lucide-react";
+import { ThemeImage } from "@/components/theme-image";
 
 const features = [
   {
@@ -54,12 +54,12 @@ export default function MoreInfo() {
           ))}
         </div>
 
-        <div className="relative w-full h-full bg-blue-300/90 rounded-3xl overflow-hidden">
-          <Image
-            src="/challenges-hackathons.png"
-            alt="Skill section"
+        <div className="relative w-full h-full rounded-3xl overflow-hidden">
+          <ThemeImage
+            alt="Dashboard page"
+            srcDark="/dashboard-dark.png"
+            srcLight="/dashboard-light.png"
             fill
-            className="object-cover"
           />
         </div>
       </div>

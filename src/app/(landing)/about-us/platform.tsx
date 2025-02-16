@@ -1,8 +1,15 @@
 import React from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { getImageProps } from "next/image";
 
 const Platform = () => {
+  const common = { alt: "Platform challenges", fill: true };
+  const {
+    props: { srcSet: dark },
+  } = getImageProps({ ...common, src: "/challenges-dark.png" });
+  const {
+    props: { srcSet: light, ...rest },
+  } = getImageProps({ ...common, src: "/challenges-light.png" });
   return (
     <section>
       <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -24,13 +31,12 @@ const Platform = () => {
           </p>
           <Button size={"lg"}>Get Started</Button>
         </div>
-        <div className="relative h-[400px] rounded-lg overflow-hidden">
-          <Image
-            src="/placeholder.svg"
-            alt="Platform screenshot"
-            fill
-            className="object-cover"
-          />
+        <div className="relative rounded-lg overflow-hidden">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcSet={dark} />
+            <source media="(prefers-color-scheme: light)" srcSet={light} />
+            <img {...rest} />
+          </picture>
         </div>
       </div>
     </section>

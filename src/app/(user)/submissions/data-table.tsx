@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
     <div className="space-y-6">
       <div className="flex items-center">
         <Input
-          placeholder="Filter challenges..."
+          placeholder="Filter challenges by challenge ID"
           value={
             (table.getColumn("challengeId")?.getFilterValue() as string) ?? ""
           }

@@ -215,3 +215,23 @@ export async function getUserChallenges(userId: string) {
     return { error: "Failed to fetch challenges" };
   }
 }
+
+export async function makeAdmin(userId: string) {
+  try {
+    // const session = await auth();
+    // if (session?.user.role !== "ADMIN") return { error: "Not authorized" };
+    const existingUser = await db.user.findUnique({
+      where: { id: userId },
+    });
+    if (!existingUser) return { error: "User not found" };
+    const user = await db.user.update({
+      where: { id: userId },
+      data: { role: "ADMIN" },
+    });
+
+    return { data: user };
+  } catch (error) {
+    console.error(error);
+    return { error: "Failed to make user admin" };
+  }
+}

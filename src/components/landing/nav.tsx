@@ -18,7 +18,6 @@ const navLinks = [
   { href: "/for-learning-institutions", label: "For Educational Institutions" },
   { href: "/about-us", label: "About Us" },
   { href: "/contact-us", label: "Contact Us" },
-  { href: "/features", label: "Features" },
 ];
 
 const Nav = () => {
@@ -51,7 +50,7 @@ const Nav = () => {
                 {link.label}
               </Link>
             ))}
-            <div className="relativeflex-[0_0_auto] mt-2">
+            <div className="relative flex-[0_0_auto] mt-2">
               <Button asChild>
                 <Link href="/dashboard">Join the Program</Link>
               </Button>

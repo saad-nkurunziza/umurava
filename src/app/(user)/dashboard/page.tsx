@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { StatCard } from "@/components/stat-card";
 import ChallengeCard from "@/components/challenge-card";
-import { getUserStats, getUserChallenges } from "@/lib/actions/user";
+import { getUserStats, getUserChallenges, makeAdmin } from "@/lib/actions/user";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Trophy, Clock, DollarSign, Plus, Send } from "lucide-react";
@@ -12,6 +12,13 @@ import { Fragment } from "react";
 import NoPage from "@/components/not-found";
 import { getChallenges } from "@/lib/actions/challenges";
 import { auth } from "@/lib/auth";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 export default async function Dashboard() {
   const session = await auth();
 
@@ -88,6 +95,34 @@ export default async function Dashboard() {
                 <span className="ml-2 hidden sm:flex">Create challenge</span>
               </Link>
             </Button>
+          )}
+          {user.role === "USER" && (
+            <form
+              action={async () => {
+                "use server";
+                await makeAdmin(user.id ?? "");
+              }}
+            >
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      type="submit"
+                      className="rounded-xl relative"
+                    >
+                      <Plus className="size-4" />
+                      <span className="ml-2 hidden sm:flex">
+                        Make yourself admin
+                      </span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Make urself admin for testing purposes</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </form>
           )}
         </div>
         {isEmpty ? (

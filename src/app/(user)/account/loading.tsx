@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <div className="space-y-8">
       {/* Profile Card Skeleton */}
-      <div className="rounded-lg border border/40 p-6">
+      <div className="rounded-lg border border-border/40 p-6">
         <div className="flex items-center gap-4">
           <Skeleton className="h-20 w-20 rounded-full" />
           <div className="space-y-2">
@@ -21,7 +21,7 @@ export default function Loading() {
       {/* Stats Grid Skeleton */}
       <div className="grid gap-4 md:grid-cols-3">
         {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="rounded-lg border border/40 p-6">
+          <div key={i} className="rounded-lg border border-border/40 p-6">
             <div className="flex items-center gap-2">
               <Skeleton className="h-4 w-4" />
               <Skeleton className="h-6 w-[100px]" />
@@ -33,7 +33,7 @@ export default function Loading() {
       </div>
 
       {/* Recent Challenges Skeleton */}
-      <div className="rounded-lg border border/40 p-6">
+      <div className="rounded-lg border border-border/40 p-6">
         <div className="space-y-4">
           <div>
             <Skeleton className="h-6 w-[200px]" />
@@ -42,7 +42,7 @@ export default function Loading() {
           {Array.from({ length: 3 }).map((_, i) => (
             <div
               key={i}
-              className="flex items-center justify-between p-4 border border/40 rounded-lg"
+              className="flex items-center justify-between p-4 border border-border/40 rounded-lg"
             >
               <div className="space-y-2">
                 <Skeleton className="h-5 w-[200px]" />

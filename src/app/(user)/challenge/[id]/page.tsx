@@ -168,7 +168,6 @@ export default async function ChallengeDetailsPage({
               />
             </CardContent>
             <CardFooter className="flex gap-4">
-              {/* Admin Controls */}
               {session.user.role === "ADMIN" ? (
                 <>
                   {/* Delete Challenge Dialog */}
@@ -220,7 +219,6 @@ export default async function ChallengeDetailsPage({
                   </Button>
                 </>
               ) : (
-                /* User Controls */
                 <>
                   {isJoined && !isSubmitted ? (
                     /* Leave Challenge Button */
@@ -349,21 +347,11 @@ export default async function ChallengeDetailsPage({
                                   <form
                                     action={async () => {
                                       "use server";
-                                      const result =
-                                        await removeUserFromChallenge(
-                                          challenge.id,
-                                          item.user.id
-                                        );
-                                      if (result.data) {
-                                        revalidatePath(
-                                          `/challenge/${challenge.id}`
-                                        );
-                                        revalidatePath(
-                                          `/account/${item.user.id}`
-                                        );
-                                      } else {
-                                        console.error(result);
-                                      }
+
+                                      await removeUserFromChallenge(
+                                        challenge.id,
+                                        item.user.id
+                                      );
                                     }}
                                   >
                                     <SubmitButton

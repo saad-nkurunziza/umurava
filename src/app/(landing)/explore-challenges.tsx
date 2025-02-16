@@ -2,7 +2,8 @@ import React from "react";
 import SectionTitle from "../../components/landing/section-title";
 import ChallengeCard from "../../components/landing/challenge-card";
 import { Button } from "../../components/ui/button";
-// h-[1030px]
+import Link from "next/link";
+
 const ExploreChallenges = () => {
   return (
     <section>
@@ -17,7 +18,9 @@ const ExploreChallenges = () => {
         <ChallengeCard />
       </div>
       <div className="flex mt-12 justify-center">
-        <Button variant={"outline"}>View More</Button>
+        <Button variant={"outline"}>
+          <Link href="/challenges-hackathons">View More</Link>
+        </Button>
       </div>
     </section>
   );

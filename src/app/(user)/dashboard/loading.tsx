@@ -10,7 +10,7 @@ export default function Loading() {
 
       <div className="mb-12 grid gap-6 grid-cols-2 sm:grid-cols-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="p-6 border/40 rounded-lg">
+          <div key={i} className="p-6 border-border/40 rounded-lg">
             <div className="flex items-center gap-2">
               <Skeleton className="h-4 w-4" />
               <Skeleton className="h-6 w-[60px]" />
@@ -21,7 +21,7 @@ export default function Loading() {
       </div>
 
       <div className="mb-12">
-        <div className="border/40 p-6 rounded-lg">
+        <div className="border-border/40 p-6 rounded-lg">
           <Skeleton className="h-6 w-[180px] mb-6" />
           <div className="space-y-6">
             {Array.from({ length: 3 }).map((_, i) => (
@@ -44,7 +44,7 @@ export default function Loading() {
         </div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="border/40 rounded-lg p-6">
+            <div key={i} className="border-border/40 rounded-lg p-6">
               <Skeleton className="h-48 w-full rounded-lg mb-4" />
               <Skeleton className="h-6 w-3/4 mb-2" />
               <Skeleton className="h-4 w-1/2 mb-4" />
