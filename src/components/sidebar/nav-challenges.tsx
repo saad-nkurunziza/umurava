@@ -56,8 +56,11 @@ export function NavChallenges() {
           result.data.map((item) => (
             <SidebarMenuItem key={item.id}>
               <SidebarMenuButton asChild>
-                <Link href={`/challenge/${item.challenge.id}`}>
-                  <span className="line-clamp-1">{item.challenge.title}</span>
+                <Link
+                  href={`/challenge/${item.challenge.id}`}
+                  className="line-clamp-1 overflow-hidden text-ellipsis whitespace-nowrap"
+                >
+                  {item.challenge.title}
                 </Link>
               </SidebarMenuButton>
               <DropdownMenu>

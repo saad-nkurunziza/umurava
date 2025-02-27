@@ -41,7 +41,19 @@ export default async function Challenges() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 md:py-8">
+      <header className="mb-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">
+              Explore Challengess
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Browse and discover available challenges from the community
+            </p>
+          </div>
+        </div>
+      </header>
       <div className="space-y-8">
         <Tabs defaultValue="All" className="mb-8">
           <TabsList className="h-10 items-center justify-start rounded-none border-b bg-transparent p-0">

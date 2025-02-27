@@ -14,7 +14,6 @@ import { Button } from "../ui/button";
 import { Menu } from "lucide-react";
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/challenges-hackathons", label: "Challenge & Hackathons" },
   { href: "/for-learning-institutions", label: "For Educational Institutions" },
   { href: "/about-us", label: "About Us" },
   { href: "/contact-us", label: "Contact Us" },

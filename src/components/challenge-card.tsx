@@ -1,11 +1,82 @@
 import React from "react";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { Card } from "@/components/ui/card";
-import type { Challenge } from "@prisma/client";
+import { Clock, BookOpen, Award, ChevronRight } from "lucide-react";
+import type {
+  Challenge,
+  ChallengeStatus,
+  DeliverableStatus,
+  UserChallengeStatus,
+} from "@prisma/client";
 import { differenceInDays } from "date-fns";
 import Link from "next/link";
 import { getStatus } from "@/lib/actions/status";
+
+function getStatusBadge(
+  challengeStatus: {
+    status: ChallengeStatus;
+    participants: {
+      status: UserChallengeStatus;
+    }[];
+    submissions: {
+      status: DeliverableStatus;
+    }[];
+  } | null
+) {
+  if (!challengeStatus) return null;
+
+  const statusConfig = {
+    Accepted: {
+      condition: () => challengeStatus.submissions?.[0]?.status === "Accepted",
+      variant: "green" as const,
+    },
+    Ongoing: {
+      condition: () => challengeStatus.participants?.[0]?.status === "Ongoing",
+      variant: "blue" as const,
+    },
+    Canceled: {
+      condition: () => challengeStatus.status === "Canceled",
+      variant: "red" as const,
+    },
+    Postponed: {
+      condition: () => challengeStatus.status === "Postponed",
+      variant: "amber" as const,
+    },
+    Rejected: {
+      condition: () => challengeStatus.submissions?.[0]?.status === "Rejected",
+      variant: "pink" as const,
+    },
+    "Needs revision": {
+      condition: () =>
+        challengeStatus.submissions?.[0]?.status === "NeedsRevision",
+      variant: "yellow" as const,
+    },
+    Submitted: {
+      condition: () => challengeStatus.submissions?.[0]?.status === "Submitted",
+      variant: "purple" as const,
+    },
+    Joined: {
+      condition: () => challengeStatus.participants?.[0]?.status === "Open",
+      variant: "blue" as const,
+    },
+    Closed: {
+      condition: () => challengeStatus.status === "Closed",
+      variant: "gray" as const,
+    },
+    Open: {
+      condition: () => challengeStatus.status === "Open",
+      variant: "green" as const,
+    },
+  };
+
+  for (const [status, { condition, variant }] of Object.entries(statusConfig)) {
+    if (condition()) {
+      return <Badge variant={variant}>{status}</Badge>;
+    }
+  }
+
+  return null;
+}
 
 export default async function ChallengeCard({
   challenge,
@@ -15,101 +86,71 @@ export default async function ChallengeCard({
   const req = await getStatus(challenge.id);
   const challengeStatus = req?.data || null;
   return (
-    <Card className="overflow-hidden self-start">
-      <div className="border-b p-6 space-y-2">
-        <div className="flex gap-1 justify-between">
-          <div className="">
-            <h3 className="font-medium">{challenge.title}</h3>
-            <p className="text-muted-foreground text-sm line-clamp-2">
-              {challenge.projectDescription}
-            </p>
+    <div className="self-start border rounded-lg max-w-md transition-all duration-300">
+      <div className="p-5 pb-0">{getStatusBadge(challengeStatus)}</div>
+
+      <div className="p-5">
+        <h3 className="text-lg font-medium mb-1"> {challenge.title}</h3>
+        <p className="text-muted-foreground mb-4 text-sm">
+          {" "}
+          {challenge.projectDescription}
+        </p>
+
+        <div className="flex gap-4 mb-4 text-xs">
+          <div className="flex items-center text-muted-foreground/80">
+            <Clock size={14} className="mr-1" />
+            <span>
+              {" "}
+              {differenceInDays(
+                new Date(challenge.endDate),
+                new Date(challenge.startDate)
+              )}{" "}
+              days
+            </span>
           </div>
-          <div className="self-start">
-            {challengeStatus ? (
-              challengeStatus.submissions?.[0]?.status === "Accepted" ? (
-                <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-200 dark:border-emerald-800">
-                  Accepted
-                </Badge>
-              ) : challengeStatus.participants?.[0]?.status === "Ongoing" ? (
-                <Badge className="bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-950 dark:text-sky-200 dark:border-sky-800">
-                  Ongoing
-                </Badge>
-              ) : challengeStatus.status === "Canceled" ? (
-                <Badge className="bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-950 dark:text-rose-200 dark:border-rose-800">
-                  Canceled
-                </Badge>
-              ) : challengeStatus.status === "Postponed" ? (
-                <Badge className="bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-800">
-                  Postponed
-                </Badge>
-              ) : challengeStatus.submissions?.[0]?.status === "Rejected" ? (
-                <Badge className="bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-950 dark:text-rose-200 dark:border-rose-800">
-                  Rejected
-                </Badge>
-              ) : challengeStatus.submissions?.[0]?.status ===
-                "NeedsRevision" ? (
-                <Badge className="bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-950 dark:text-orange-200 dark:border-orange-800">
-                  Needs revision
-                </Badge>
-              ) : challengeStatus.submissions?.[0]?.status === "Submitted" ? (
-                <Badge className="bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-950 dark:text-purple-200 dark:border-purple-800">
-                  Submitted
-                </Badge>
-              ) : challengeStatus.participants?.[0]?.status === "Open" ? (
-                <Badge className="bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-950 dark:text-sky-200 dark:border-sky-800">
-                  Joined
-                </Badge>
-              ) : challengeStatus.status === "Closed" ? (
-                <Badge className="bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-950 dark:text-slate-200 dark:border-slate-800">
-                  Closed
-                </Badge>
-              ) : challengeStatus.status === "Open" ? (
-                <Badge className="bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-950 dark:text-emerald-200 dark:border-emerald-800">
-                  Open
-                </Badge>
-              ) : null
-            ) : null}
+          <div className="flex items-center text-muted-foreground/80">
+            <BookOpen size={14} className="mr-1" />
+            <span>{challenge.level}</span>
+          </div>
+          <div className="flex items-center text-muted-foreground/80">
+            <Award size={14} className="mr-1" />
+            <span>500 XP</span>
           </div>
         </div>
-      </div>
-      <div className="p-6">
-        <div className="space-y-4">
-          <div>
-            <p className="text-sm font-medium">Skills Needed:</p>
-            <div className="flex flex-wrap gap-2">
-              {challenge.skills.map((skill) => (
-                <Badge variant="secondary" key={skill}>
-                  {" "}
-                  {skill}
-                </Badge>
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="text-sm font-medium">Seniority Level:</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {challenge.level}
-            </p>
-          </div>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium">Timeline:</p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {differenceInDays(
-                  new Date(challenge.endDate),
-                  new Date(challenge.startDate)
-                )}{" "}
-                days
-              </p>
-            </div>
-          </div>
-          <div className="">
-            <Button className="w-full" asChild size={"sm"}>
-              <Link href={`/challenge/${challenge.id}`}>View Challenge</Link>
-            </Button>
+
+        <div className="mb-4">
+          <div className="flex flex-wrap gap-1">
+            {challenge.skills.map((skill) => (
+              <Badge variant="secondary" key={skill}>
+                {" "}
+                {skill}
+              </Badge>
+            ))}
           </div>
         </div>
+
+        {/* <div className="mb-5">
+          <div className="flex justify-between text-xs mb-1">
+            <span className="text-muted-foreground">Progress</span>
+            <span className="font-medium">35%</span>
+          </div>
+          <div className="w-full bg-muted rounded-full h-1">
+            <div
+              className="bg-background h-1 rounded-full"
+              style={{ width: "35%" }}
+            ></div>
+          </div>
+        </div> */}
+
+        <Button
+          asChild
+          className="w-full py-2 rounded-md flex items-center justify-center text-sm font-medium "
+        >
+          <Link href={`/challenge/${challenge.id}`}>
+            Continue <ChevronRight size={16} className="ml-1" />
+          </Link>
+        </Button>
       </div>
-    </Card>
+    </div>
   );
 }
