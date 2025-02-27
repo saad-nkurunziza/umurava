@@ -1,12 +1,11 @@
-import About from "@/app/(landing)/about";
-import CTA from "@/app/(landing)/cta";
-import ExploreChallenges from "@/app/(landing)/explore-challenges";
-import { HeroSection } from "@/app/(landing)/hero";
-import HowToGetStarted from "@/app/(landing)/how-to-get-started";
-import MoreInfo from "@/app/(landing)/more-info";
-import Programs from "@/app/(landing)/programs";
-import { Skills } from "@/app/(landing)/skills";
-import { Stats } from "@/app/(landing)/stats";
+import About from "./about";
+import CTA from "./cta";
+import { HeroSection } from "./hero";
+import HowToGetStarted from "./how-to-get-started";
+import MoreInfo from "./more-info";
+import Programs from "./programs";
+import { Skills } from "./skills";
+import { Stats } from "./stats";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
       </div>
       <Stats />
       <Skills />
-      <ExploreChallenges />
       <div className="even-row">
         <MoreInfo />
       </div>

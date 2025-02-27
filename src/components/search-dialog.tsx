@@ -23,22 +23,19 @@ import { fetcher } from "@/utils/fetcher";
 import { Skeleton } from "./ui/skeleton";
 import { SearchType } from "@/utils/types";
 
-// Types
 interface SearchResponse {
   data?: SearchType[];
   error?: string;
 }
 
-// Constants
 const DEBOUNCE_DELAY = 300;
-const SKELETON_COUNT = 8;
+const SKELETON_COUNT = 4;
 
 export function SearchDialog() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
 
-  // Debounced search handler
   const handleSearch = useDebouncedCallback((value: string) => {
     setQuery(value);
   }, DEBOUNCE_DELAY);
@@ -52,7 +49,6 @@ export function SearchDialog() {
     fetcher
   );
 
-  // Render helpers
   const renderLoadingState = () => (
     <div className="flex flex-1 flex-col gap-4 p-4">
       {Array.from({ length: SKELETON_COUNT }).map((_, index) => (
