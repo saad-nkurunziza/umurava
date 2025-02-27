@@ -42,3 +42,24 @@ export async function getStatus(challengeId: string) {
     return { error: "Internal server error" };
   }
 }
+
+export const checkIfJoined = async (challengeId: string) => {
+  try {
+    const session = await auth();
+    if (!session || !session.user) {
+      console.error("Unauthorized access attempt");
+      return false;
+    }
+    const userChallenge = await db.userChallenge.findFirst({
+      where: {
+        userId: session.user.id,
+        challengeId,
+      },
+    });
+    const isJoined = userChallenge ? true : false;
+    return isJoined;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};

@@ -10,7 +10,7 @@ import type {
 } from "@prisma/client";
 import { differenceInDays } from "date-fns";
 import Link from "next/link";
-import { getStatus } from "@/lib/actions/status";
+import { getStatus, checkIfJoined } from "@/lib/actions/status";
 
 function getStatusBadge(
   challengeStatus: {
@@ -85,13 +85,14 @@ export default async function ChallengeCard({
 }) {
   const req = await getStatus(challenge.id);
   const challengeStatus = req?.data || null;
+  const isJoined = await checkIfJoined(challenge.id);
   return (
     <div className="self-start border rounded-lg max-w-md transition-all duration-300">
       <div className="p-5 pb-0">{getStatusBadge(challengeStatus)}</div>
 
       <div className="p-5">
         <h3 className="text-lg font-medium mb-1"> {challenge.title}</h3>
-        <p className="text-muted-foreground mb-4 text-sm">
+        <p className="text-muted-foreground mb-4 text-sm line-clamp-2">
           {" "}
           {challenge.projectDescription}
         </p>
@@ -114,7 +115,7 @@ export default async function ChallengeCard({
           </div>
           <div className="flex items-center text-muted-foreground/80">
             <Award size={14} className="mr-1" />
-            <span>500 XP</span>
+            <span>{challenge.prize}</span>
           </div>
         </div>
 
@@ -147,7 +148,8 @@ export default async function ChallengeCard({
           className="w-full py-2 rounded-md flex items-center justify-center text-sm font-medium "
         >
           <Link href={`/challenge/${challenge.id}`}>
-            Continue <ChevronRight size={16} className="ml-1" />
+            {isJoined ? "Continue" : "Start"}{" "}
+            <ChevronRight size={16} className="ml-1" />
           </Link>
         </Button>
       </div>
